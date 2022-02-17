@@ -1,4 +1,4 @@
-# Projeto-CG
+# G.A.I.A
 
 OpenGL based engine that parses a XML file containing a scene
 
@@ -28,3 +28,7 @@ Run in this order
 `cmake --build .`
 
 `.\Debug\Engine.exe [ficheiro XML]`
+
+## Gade
+
+⭐ (15.35/20)

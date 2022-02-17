@@ -1,4 +1,4 @@
-# G.A.I.A
+# Graphical Engine
 
 OpenGL based engine that parses a XML file containing a scene
 

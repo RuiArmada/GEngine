@@ -12,7 +12,7 @@ OpenGL based engine that parses a XML file containing a scene
 ## Generator
 Please execute main.cpp with
 ```
-g++ .\fase3\generator\bezier.cpp .\fase3\generator\box.cpp .\fase3\generator\cone.cpp .\fase3\generator\main.cpp .\fase3\generator\plane.cpp .\fase3\generator\sphere.cpp .\fase3\generator\torus.cpp .\fase3\utils\point.cpp -Iinclude -o generator -std=c++11
+g++ .\faseX\generator\bezier.cpp .\faseX\generator\box.cpp .\faseX\generator\cone.cpp .\faseX\generator\main.cpp .\faseX\generator\plane.cpp .\faseX\generator\sphere.cpp .\faseX\generator\torus.cpp .\faseX\utils\point.cpp -Iinclude -o generator -std=c++11
 ```
 
 ## Engine
@@ -23,12 +23,12 @@ Run in this order
 
 `cd build`
 
-`cmake .. -DTOOLKITS_FOLDER:STRING=[path para a pasta dos toolkits] -A Win32`
+`cmake .. -DTOOLKITS_FOLDER:STRING=[path to toolkits folder] -A Win32`
 
 `cmake --build .`
 
-`.\Debug\Engine.exe [ficheiro XML]`
+`.\Debug\Engine.exe [XML File]`
 
-## Gade
+## Grade
 
 ⭐ (15.35/20)

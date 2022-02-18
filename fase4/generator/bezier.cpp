@@ -49,6 +49,52 @@ float* bezier(float a, float b, float** points, int* indice) {
     return result;
 }
 
+float* bezierU(float u, float v, float** points, int* indice) {
+    float UM[4] = {-3*u*u + 6*u -3, 9*u*u - 12*u + 3, -9*u*u + 6*u, 3*u*u};
+    float X[4][3];
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            X[i][0] += UM[j] * points[indice[4*j+i]][0];
+            X[i][1] += UM[j] * points[indice[4*j+i]][1];
+            X[i][2] += UM[j] * points[indice[4*j+i]][2];
+        }
+    }
+    float Y[4][3];
+    for(int j = 0; j < 3; j++) {
+        Y[0][j] += X[0][j] * -1 + X[1][j] * 3  + X[2][j] * -3 + X[3][j];
+        Y[1][j] += X[0][j] * 3  + X[1][j] * -6 + X[2][j] * 3;
+        Y[2][j] += X[0][j] * -3 + X[1][j] * 3;
+        Y[3][j] += X[0][j];
+    }
+    float * Z = new float[3];
+    for(int j = 0; j < 3; j++)
+        Z[j] = Y[0][j] * v * v * v + Y[1][j] * v * v + Y[2][j] * v + Y[3][j];
+    return Z;
+}
+
+float* bezierV(float u, float v, float** points, int* indice) {
+    float UM[4] = {-u*u*u + 3*u*u -3*u + 1, 3*u*u*u - 6*u*u + 3*u, -3*u*u*u + 3*u*u, u*u*u};
+    float X[4][3];
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            X[i][0] += UM[j] * points[indice[4*j+i]][0];
+            X[i][1] += UM[j] * points[indice[4*j+i]][1];
+            X[i][2] += UM[j] * points[indice[4*j+i]][2];
+        }
+    }
+    float Y[4][3];
+    for(int j = 0; j < 3; j++) {
+        Y[0][j] += X[0][j] * -1 + X[1][j] * 3  + X[2][j] * -3 + X[3][j];
+        Y[1][j] += X[0][j] * 3  + X[1][j] * -6 + X[2][j] * 3;
+        Y[2][j] += X[0][j] * -3 + X[1][j] * 3;
+        Y[3][j] += X[0][j];
+    }
+    float * Z = new float[3];
+    for(int j = 0; j < 3; j++)
+        Z[j] = Y[0][j] * 3 * v * v + Y[1][j] * 2 * v + Y[2][j];
+    return Z;
+}
+
 std::array<std::vector<Point>,3> drawPatch(std::string file , int tess) {
     std::vector<Point> bezierVector;
     std::vector<Point> normals;
@@ -91,6 +137,8 @@ std::array<std::vector<Point>,3> drawPatch(std::string file , int tess) {
             float ** normU = new float*[4];
             float ** normV = new float*[4];
             for(int x = 0 ; x < tess ; x++) {
+                float n[3];
+			    float t[2];
                 for(int y = 0 ; y < tess ; y++) {
                     float x1 = inc * x;
                     float x2 = inc * (x + 1);
@@ -102,10 +150,27 @@ std::array<std::vector<Point>,3> drawPatch(std::string file , int tess) {
                     ptResult[2] = bezier(x2 , y1 , points , index[i3]);
                     ptResult[3] = bezier(x2 , y2 , points , index[i3]);
 
+                    normU[0] = bezierU(x1 , y1 , points , index[i3]);
+                    normU[1] = bezierU(x1 , y2 , points , index[i3]);
+                    normU[2] = bezierU(x2 , y1 , points , index[i3]);
+                    normU[3] = bezierU(x2 , y2 , points , index[i3]);
+
+                    normV[0] = bezierV(x1 , y1 , points , index[i3]);
+                    normV[1] = bezierV(x1 , y2 , points , index[i3]);
+                    normV[2] = bezierV(x2 , y1 , points , index[i3]);
+                    normV[3] = bezierV(x2 , y2 , points , index[i3]);
+
                     Point p1 = Point(ptResult[0][0] , ptResult[0][1] , ptResult[0][2]);
                     Point p2 = Point(ptResult[2][0] , ptResult[2][1] , ptResult[2][2]);
                     Point p3 = Point(ptResult[3][0] , ptResult[3][1] , ptResult[3][2]);
                     Point p4 = Point(ptResult[1][0] , ptResult[1][1] , ptResult[1][2]);
+
+                    // Point n1 = Point(normU[0][1]*normV[0][2] - normU[0][2]*normV[0][1], normU[0][2]*normV[0][0] - normU[0][0]*normV[0][2], normU[0][0]*normV[0][1] - normU[0][1]*normV[0][0]);
+                    // Point n2 = Point(normU[1][1]*normV[1][2] - normU[1][2]*normV[1][1], normU[1][2]*normV[1][0] - normU[1][0]*normV[1][2], normU[1][0]*normV[1][1] - normU[1][1]*normV[1][0]);
+                    // Point n3 = Point(normU[2][1]*normV[2][2] - normU[2][2]*normV[2][1], normU[2][2]*normV[2][0] - normU[2][0]*normV[2][2], normU[2][0]*normV[2][1] - normU[2][1]*normV[2][0]);
+                    // Point n4 = Point(normU[3][1]*normV[3][2] - normU[3][2]*normV[3][1], normU[3][2]*normV[3][0] - normU[3][0]*normV[3][2], normU[3][0]*normV[3][1] - normU[3][1]*normV[3][0]);
+
+                    Point tex = Point(t[0] , t[1] , 0.0f);
 
                     Point u1 = Point(p2.x() - p1.x(), p2.y() - p1.y(), p2.z() - p1.z());
                     Point v1 = Point(p3.x() - p1.x(), p3.y() - p1.y(), p3.z() - p1.z());
@@ -144,6 +209,8 @@ std::array<std::vector<Point>,3> drawPatch(std::string file , int tess) {
                     normals.push_back(n1_.normalize());
                     normals.push_back(n3_.normalize());
                     normals.push_back(n4.normalize());
+
+                    for(int i = 0; i < 6; i++) textures.push_back(tex); // Maybe I'm dumb 
                 }
             }
         }

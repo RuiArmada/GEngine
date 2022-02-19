@@ -1,4 +1,4 @@
-# Graphical Engine
+# GEngine
 
 OpenGL based engine that parses a XML file containing a scene
 

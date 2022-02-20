@@ -3,10 +3,10 @@
 OpenGL based engine that parses a XML file containing a scene
 
 ## Authors
-* [Ariana Raquel Barreira Lousada](https://github.com/AITK42)
-* [Carolina da Torre Vila Chã](https://github.com/carolinavc99)
-* [Rui Filipe Pimenta Armada](https://github.com/RuiArmada)
-* [Sofia Guilherme Rodrigues dos Santos](https://github.com/RisingFisan)
+* [Ariana Lousada](https://github.com/AITK42)
+* [Carolina Vila Chã](https://github.com/carolinavc99)
+* [Rui Armada](https://github.com/RuiArmada)
+* [Sofia Santos](https://github.com/RisingFisan)
 
 
 ## Generator

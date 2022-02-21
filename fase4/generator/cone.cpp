@@ -35,24 +35,29 @@ std::array<std::vector<Point>,3> drawCone(double radius, double height, int slic
 
             double dis1 = sqrt(pow(p1.x(),2)+pow(p1.y()-height,2)+pow(p1.y(),2));
             double D1 = dis1 / cos(atan(radius/height));
+
             Point n1 = Point(p1.x(), p1.y() - (height - D1), p1.z()).normalize();
 
             double dis2 = sqrt(pow(p2.x(),2)+pow(p2.y()-height,2)+pow(p2.y(),2));
             double D2 = dis2 / cos(atan(radius/height));
+
             Point n2 = Point(p2.x(), p2.y() - (height - D2), p2.z()).normalize();
 
             double dis3 = sqrt(pow(p3.x(),2)+pow(p3.y()-height,2)+pow(p3.y(),2));
             double D3 = dis3 / cos(atan(radius/height));
+
             Point n3 = Point(p3.x(), p3.y() - (height - D3), p3.z()).normalize();
 
             double dis4 = sqrt(pow(p4.x(),2)+pow(p4.y()-height,2)+pow(p4.y(),2));
             double D4 = dis4 / cos(atan(radius/height));
+
             Point n4 = Point(p4.x(), p4.y() - (height - D4), p4.z()).normalize();
 
-            Point t1 = Point((float) slice / slices ,      (float) stack / stacks , 0.0f);
-            Point t2 = Point((float) slice / slices ,      (float) (stack + 1)  / stacks + 1 , 0.0f);
-            Point t3 = Point((float) (slice + 1) / slices, (float) (stack + 1) / stacks, 0.0f);
-            Point t4 = Point((float) (slice + 1) / slices, (float) stack / stacks      , 0.0f); 
+            // Note : The formulae are wrong, needs fixing
+            Point t1 = Point((float) 0.4375 + (0.1875 / stacks) * (stacks - stack) * cos(alpha),  (float) 0.1875 + (0.1875 / stacks) * (stacks - stack) * sin(alpha) , 0.0f);
+            Point t2 = Point((float) 0.4375 + (0.1875 / stacks) * (stacks - stack) * cos(alphaX), (float) 0.1875 + (0.1875 / stacks) * (stacks - stack) * sin(alphaX) , 0.0f);
+            Point t3 = Point((float) 0.4375 + (0.1875 / stacks) * (stacks - (stack + 1)) * cos(alpha) , (float) 0.1875 + (0.1875 / stacks) * (stacks - (stack + 1)) * sin(alpha) , 0.0f);
+            Point t4 = Point((float) 0.4375 + (0.1875 / stacks) * (stacks - (stack + 1)) * cos(alphaX) , (float) 0.1875 + (0.1875 / stacks) * (stacks - (stack + 1)) * sin(alphaX) , 0.0f); 
 
             /*
             p1---p4
@@ -104,9 +109,10 @@ std::array<std::vector<Point>,3> drawCone(double radius, double height, int slic
         Point n1 = Point(0.0f , -1.0f , 0.0f);
 
         // The last two are wrong. Will check them out later
-        Point tx = Point(0, 0, 0); 
-        Point tb = Point(slice / slices , 1 , 0);
-        Point ta = Point((slice + 1) / slices , 1 , 0);
+        // Note : The formulae are wrong, needs fixing
+        Point tx = Point(0.8125, -1, 0); 
+        Point tb = Point(0.8125 + 0.1875 * cos(alpha), 0.1875 + 0.1875 * sin(alpha) , 0);
+        Point ta = Point(0.8125 + 0.1875 * cos(alphaX), 0.1875 + 0.1875 * sin(alphaX), 0);
 
         cone.push_back(px);
         cone.push_back(pb);

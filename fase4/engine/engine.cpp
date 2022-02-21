@@ -60,7 +60,7 @@ void framerate() {
         double fps = frames * 1000.0 / (time - timebase);
         timebase = time;
         frames = 0;
-        sprintf(title, "Projeto CG | %lf FPS", fps);
+        sprintf(title, "G.A.I.A | %lf FPS", fps);
         glutSetWindowTitle(title);
     }
 }
@@ -630,7 +630,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
     glutInitWindowPosition(100,100);
     glutInitWindowSize(800,800);
-    glutCreateWindow("Projeto CG");
+    glutCreateWindow("G.A.I.A");
 
     //Required callback registry
     glutDisplayFunc(renderScene);
@@ -715,17 +715,22 @@ int main(int argc, char** argv) {
 
     timebase = glutGet(GLUT_ELAPSED_TIME); 
 
-    puts("Controls for 3rd person camera: \n\
-WASD / Left mouse click + mouse movement - rotate\n\
-Q - zoom in\n\
-E - zoom out\n\
-\n\
+    #ifdef _WIN32
+    system("cls");
+    #else
+    system("clear");
+    #endif
+    puts("\nControls for 3rd person camera: \n\
+    WASD / Left mouse click + mouse movement - rotate\n\
+    Q - zoom in\n\
+    E - zoom out\n\
+    \n\
 Controls for 1st person camera:\n\
-WASD - move\n\
-Left mouse click + mouse movement - look around\n\
-\n\
+    WASD - move\n\
+    Left mouse click + mouse movement - look around\n\
+    \n\
 V - switch between 1st and 3rd person modes\n\
-Right mouse button - menu for toggling VBOs and filled models");
+Right mouse button - menu for toggling VBOs and filled models\n");
 
     //enter GLUT's main cycle
     glutMainLoop();

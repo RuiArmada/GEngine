@@ -588,6 +588,20 @@ void menu(int option) {
     glutPostRedisplay();
 }
 
+void printInfo() {
+    puts("\nControls for 3rd person camera: \n\
+    WASD / Left mouse click + mouse movement - rotate\n\
+    Q - zoom in\n\
+    E - zoom out\n\
+    \n\
+Controls for 1st person camera:\n\
+    WASD - move\n\
+    Left mouse click + mouse movement - look around\n\
+    \n\
+V - switch between 1st and 3rd person modes\n\
+Right mouse button - menu for toggling VBOs and filled models\n");
+}
+
 int main(int argc, char** argv) {
 
     if(argc != 2){
@@ -720,17 +734,8 @@ int main(int argc, char** argv) {
     #else
     system("clear");
     #endif
-    puts("\nControls for 3rd person camera: \n\
-    WASD / Left mouse click + mouse movement - rotate\n\
-    Q - zoom in\n\
-    E - zoom out\n\
-    \n\
-Controls for 1st person camera:\n\
-    WASD - move\n\
-    Left mouse click + mouse movement - look around\n\
-    \n\
-V - switch between 1st and 3rd person modes\n\
-Right mouse button - menu for toggling VBOs and filled models\n");
+    
+    printInfo();
 
     //enter GLUT's main cycle
     glutMainLoop();

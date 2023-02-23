@@ -5,8 +5,8 @@ PROJECT(Engine)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-file(GLOB SOURCES "fase4/utils/*.cpp")
-set(SOURCES ${SOURCES} fase4/engine/engine.cpp fase4/engine/parser.cpp)
+file(GLOB SOURCES "src/code/utils/*.cpp")
+set(SOURCES ${SOURCES} src/code/engine/engine.cpp src/code/engine/parser.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 # Project Name
 PROJECT(Engine)
 
+set(CMAKE_CXX_STANDARD 11)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # YOU CAN CHANGE THE RUN FOLDER HERE!
@@ -53,13 +54,19 @@ if  (WIN32)
 	
 else (WIN32) #Linux and Mac
 
-	set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} Wno-deprecated")
+	set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wno-deprecated")
 	find_package(GLUT REQUIRED)
 	include_directories(${GLUT_INCLUDE_DIR})
 	link_directories(${GLUT_LIBRARY_DIRS})
 	add_definitions(${GLUT_DEFINITIONS})
-	
-	target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )
+
+	find_package(GLEW 2.0 REQUIRED)
+	include_directories(${GLEW_INCLUDE_DIRS})
+
+	find_package(DevIL REQUIRED)
+	include_directories(${IL_INCLUDE_DIR})
+
+	target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} GLUT::GLUT ${IL_LIBRARIES} ${GLEW_LIBRARIES})
 	if(NOT GLUT_FOUND)
 	   message(ERROR ": GLUT not found!")
 	endif(NOT GLUT_FOUND)

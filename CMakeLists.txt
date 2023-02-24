@@ -5,8 +5,9 @@ PROJECT(Engine)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-file(GLOB SOURCES "src/code/utils/*.cpp")
-set(SOURCES ${SOURCES} src/code/engine/engine.cpp src/code/engine/parser.cpp)
+# YOU CAN CHANGE THE RUN FOLDER HERE!
+file(GLOB SOURCES "fase4/utils/*.cpp")
+set(SOURCES ${SOURCES} fase4/engine/engine.cpp fase4/engine/parser.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
@@ -52,7 +53,7 @@ if  (WIN32)
 	
 else (WIN32) #Linux and Mac
 
-	set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} Wno-deprecated")
+	set( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} Wno-deprecated")
 	find_package(GLUT REQUIRED)
 	include_directories(${GLUT_INCLUDE_DIR})
 	link_directories(${GLUT_LIBRARY_DIRS})

@@ -2,18 +2,12 @@
 
 OpenGL based engine that parses a XML file containing a scene
 
-## Authors
-* [Ariana Lousada](https://github.com/arbl42)
-* [Carolina Vila Chã](https://github.com/carolinavc99)
-* [Rui Armada](https://github.com/RuiArmada)
-* [Sofia Santos](https://github.com/RisingFisan)
-
 ## How to run
 
 ### Generator
 Please execute main.cpp with
 ```
-g++ .\faseX\generator\bezier.cpp .\faseX\generator\box.cpp .\faseX\generator\cone.cpp .\faseX\generator\main.cpp .\faseX\generator\plane.cpp .\faseX\generator\sphere.cpp .\faseX\generator\torus.cpp .\faseX\utils\point.cpp -Iinclude -o generator -std=c++11
+g++ .\src\generator\bezier.cpp .\src\generator\box.cpp .\src\generator\cone.cpp .\src\generator\main.cpp .\src\generator\plane.cpp .\src\generator\sphere.cpp .\src\generator\torus.cpp .\src\utils\point.cpp -Iinclude -o generator -std=c++11
 ```
 
 ### Engine
@@ -29,6 +23,12 @@ Run in this order
 `cmake --build .`
 
 `.\Debug\Engine.exe ../scenes/[XML File]`
+
+## Authors
+* [Ariana Lousada](https://github.com/arbl42)
+* [Carolina Vila Chã](https://github.com/carolinavc99)
+* [Rui Armada](https://github.com/RuiArmada)
+* [Sofia Santos](https://github.com/RisingFisan)
 
 ## Grade
 

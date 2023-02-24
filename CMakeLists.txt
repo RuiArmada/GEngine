@@ -6,8 +6,8 @@ PROJECT(Engine)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # YOU CAN CHANGE THE RUN FOLDER HERE!
-file(GLOB SOURCES "fase4/utils/*.cpp")
-set(SOURCES ${SOURCES} fase4/engine/engine.cpp fase4/engine/parser.cpp)
+file(GLOB SOURCES "src/utils/*.cpp")
+set(SOURCES ${SOURCES} src/engine/engine.cpp src/engine/parser.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

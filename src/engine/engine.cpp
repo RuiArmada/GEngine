@@ -1,10 +1,11 @@
 #include <stdlib.h>
 
-#include <IL/il.h>
-
-#ifdef _APPLE_
+#ifdef __APPLE__
+#include <GL/glew.h>
 #include <GLUT/glut.h>
+#include <il.h>
 #else
+#include <IL/il.h>
 #include <GL/glew.h>
 #include <GL/glut.h>
 #endif
